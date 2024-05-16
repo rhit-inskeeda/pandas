@@ -861,7 +861,7 @@ def read_csv(
         dtype_backend=dtype_backend,
     )
     kwds.update(kwds_defaults)
-
+    print("used read_csv")
     return _read(filepath_or_buffer, kwds)
 
 
@@ -1598,8 +1598,9 @@ class TextFileReader(abc.Iterator):
                 dtype = defaultdict(lambda: dtype_arg)
             else:
                 dtype = None
-
+            print("dtype in read: ", dtype)
             if dtype is not None:
+                print("Has dtype")
                 new_col_dict = {}
                 for k, v in col_dict.items():
                     d = (
@@ -1622,6 +1623,7 @@ class TextFileReader(abc.Iterator):
         return df
 
     def get_chunk(self, size: int | None = None) -> DataFrame:
+        print("got chunk")
         if size is None:
             size = self.chunksize
         if self.nrows is not None:
